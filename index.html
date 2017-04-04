@@ -16,16 +16,16 @@ function Car(name){
             get: function () {
                 return this.state;
             },
-            set: function (state) {
+            set: function () {
                 this.stop = function () {
                     //make the car console log a message to indicate it is stopping
-                    state = "stopped";
-                    console.log("Car is", state);
+                    this.state = "stopped";
+                    console.log("Car is", this.state);
                 },
                 this.drive = function () {
                     //make the car console log a message to indicate it is moving
-                    state = "driving";
-                    console.log("Car is", state);
+                    this.state = "driving";
+                    console.log("Car is", this.state);
                 };
             }
         }
@@ -43,13 +43,13 @@ function TrafficLight(){
 	this.turnRed = function(){
 		//make all the cars stop
         for (var i = 0; i < this.cars.length; i++) {
-            Object.assign(this.cars[i].currentState, "stopped");
+            this.cars[i].state = "stopped";
         }
-	}
+	};
 	this.turnGreen = function(){
 		//make all the cars start
         for (var i = 0; i < this.cars.length; i++) {
-            Object.assign(this.cars[i].currentState,"driving");
+            this.cars[i].state = "driving";
         }
 	}
 }
