@@ -4,29 +4,57 @@
 	<title></title>
 	<script>
 
-function Car(){
-	this.name//name of the car for ease of determination of objects
-	this.stop = function(){
-		//make the car console log a message to indicate it is stopping
-	}
-	this.drive = function(){
-		//make the car console log a message to indicate it is moving
-	}
+function Car(name){
+	//name of the car for ease of determination of objects
+    this.name = name;
+    //The current state of the car, i.e. stopped or started;
+    this.currentState;
+    this.state = null;// Can either be "driving" or "stopped"
+
+    Object.defineProperties(this, {
+        currentState: {
+            get: function () {
+                return this.state;
+            },
+            set: function (state) {
+                this.stop = function () {
+                    //make the car console log a message to indicate it is stopping
+                    state = "stopped";
+                    console.log("Car is", state);
+                },
+                this.drive = function () {
+                    //make the car console log a message to indicate it is moving
+                    state = "driving";
+                    console.log("Car is", state);
+                };
+            }
+        }
+    });
 }
 
 function TrafficLight(){
 	this.cars = [];
 	this.addCar = function(){
 		//add a car to the list of cars that will be made
+        this.cars.push(new Car("Herbie"));
+        this.cars.push(new Car("Knight Rider"));
 		//probably should make the cars here too
-	}
+	};
 	this.turnRed = function(){
 		//make all the cars stop
+        for (var i = 0; i < this.cars.length; i++) {
+            Object.assign(this.cars[i].currentState, "stopped");
+        }
 	}
 	this.turnGreen = function(){
 		//make all the cars start
+        for (var i = 0; i < this.cars.length; i++) {
+            Object.assign(this.cars[i].currentState,"driving");
+        }
 	}
 }
+var testLight = new TrafficLight();
+testLight.addCar();
 
 
 	</script>
