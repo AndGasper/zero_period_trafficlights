@@ -55,28 +55,34 @@ function Car(name){
 //}
 //var testLight = new TrafficLight();
 //testLight.addCar();
-
+/*
+* NOTES
+* A traffic light should have a serial number for identification, a green light duration, and a red light duration
+ */
 function DOTSystem() {
     this.trafficLights = {};
-    this.addTrafficLight = function(trafficLightSerialNumber) {
-        this.trafficLights[trafficLightSerialNumber] = new TrafficLight();
+    this.addTrafficLight = function(serialNo,greenLightDuration, redLightDuration) {
+        this.trafficLights[serialNo] = new TrafficLight(serialNo,greenLightDuration,redLightDuration);
     };
     this.removeTrafficLight = (trafficLightToRemove) => {
         console.log("Traffic Light removed");
     };
 }
 
-function TrafficLight(duration) {
-    this.duration = duration; // length of the light. for now, let's assume the
-    this.cars = {};
+function TrafficLight(serialNo, greenLightDuration, redLightDuration) {
+    this.serialNo = serialNo;
+    this.greenLightDuration = greenLightDuration; // length of the green light
+    this.redLightDuration = redLightDuration; // length of the red light
+    this.cars = {}; // Cars at the intersection
     this.turnRed = () => {
         console.log("turning red intensifies");
+        // Should remove a fixed number of cars from the based on the duration; cars to remove (cars) = coefficient (cars/s) * duration (s)
     };
     this.turnGreen = () => {
         console.log("turning green");
     };
 }
-var deptTran = new DOTSystem();
+var deptTran = new DOTSystem(); // Make a new department who has a network of lights (made with *.addTrafficLight(lightSerialNo)
 console.log("deptTran", deptTran);
 deptTran.addTrafficLight(1);
 deptTran.addTrafficLight(2);
