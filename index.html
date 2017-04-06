@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Slave to the Traffic Light</title>
 	<script>
 
 function Car(name){
@@ -9,57 +9,85 @@ function Car(name){
     this.name = name;
     //The current state of the car, i.e. stopped or started;
     this.currentState;
-    this.state = null;// Can either be "driving" or "stopped"
+    var state = null;// Can either be "driving" or "stopped"
 
-    Object.defineProperties(this, {
-        currentState: {
-            get: function () {
-                return this.state;
-            },
-            set: function () {
-                this.stop = function () {
-                    //make the car console log a message to indicate it is stopping
-                    this.state = "stopped";
-                    console.log("Car is", this.state);
-                },
-                this.drive = function () {
-                    //make the car console log a message to indicate it is moving
-                    this.state = "driving";
-                    console.log("Car is", this.state);
-                };
-            }
-        }
-    });
+//    Object.defineProperties(this, {
+//        currentState: {
+//            get: function () {
+//                return state;
+//            },
+//            set: function () {
+//                this.stop = function () {
+//                    //make the car console log a message to indicate it is stopping
+//                    state = "stopped";
+//                    console.log("Car is", state);
+//                };
+//                this.drive = function () {
+//                    //make the car console log a message to indicate it is moving
+//                    this.state = "driving";
+//                    console.log("Car is", state);
+//                };
+//            }
+//        }
+//    });
 }
 
-function TrafficLight(){
-	this.cars = [];
-	this.addCar = function(){
-		//add a car to the list of cars that will be made
-        this.cars.push(new Car("Herbie"));
-        this.cars.push(new Car("Knight Rider"));
-		//probably should make the cars here too
-	};
-	this.turnRed = function(){
-		//make all the cars stop
-        for (var i = 0; i < this.cars.length; i++) {
-            this.cars[i].state = "stopped";
-        }
-	};
-	this.turnGreen = function(){
-		//make all the cars start
-        for (var i = 0; i < this.cars.length; i++) {
-            this.cars[i].state = "driving";
-        }
-	}
-}
-var testLight = new TrafficLight();
-testLight.addCar();
+//function TrafficLight(){
+//	this.cars = [];
+//	this.addCar = function(){
+//		//add a car to the list of cars that will be made
+//        this.cars.push(new Car("Herbie"));
+//        this.cars.push(new Car("Knight Rider"));
+//		//probably should make the cars here too
+//	};
+//	this.turnRed = function(){
+//		//make all the cars stop
+//        for (var i = 0; i < this.cars.length; i++) {
+//            this.cars[i].state = "stopped";
+//        }
+//	};
+//	this.turnGreen = function(){
+//		//make all the cars start
+//        for (var i = 0; i < this.cars.length; i++) {
+//            this.cars[i].state = "driving";
+//        }
+//	}
+//}
+//var testLight = new TrafficLight();
+//testLight.addCar();
 
+function DOTSystem() {
+    this.trafficLights = {};
+    this.addTrafficLight = function(trafficLightSerialNumber) {
+        this.trafficLights[trafficLightSerialNumber] = new TrafficLight();
+    };
+    this.removeTrafficLight = (trafficLightToRemove) => {
+        console.log("Traffic Light removed");
+    };
+}
+
+function TrafficLight(duration) {
+    this.duration = duration; // length of the light. for now, let's assume the
+    this.cars = {};
+    this.turnRed = () => {
+        console.log("turning red intensifies");
+    };
+    this.turnGreen = () => {
+        console.log("turning green");
+    };
+}
+var deptTran = new DOTSystem();
+console.log("deptTran", deptTran);
+deptTran.addTrafficLight(1);
+deptTran.addTrafficLight(2);
+deptTran.addTrafficLight(3);
+console.log("deptTran.trafficLights",deptTran.trafficLights);
 
 	</script>
 </head>
 <body>
-
+<div>See the city,</div>
+<div>see the zoo,</div>
+<div>traffic light wont let me through</div>
 </body>
 </html>
