@@ -63,6 +63,7 @@ function DOTSystem() {
     this.trafficLights = {};
     this.addTrafficLight = function(serialNo,greenLightDuration, redLightDuration) {
         this.trafficLights[serialNo] = new TrafficLight(serialNo,greenLightDuration,redLightDuration);
+        return this.trafficLights;
     };
     this.removeTrafficLight = (trafficLightToRemove) => {
         console.log("Traffic Light removed");
@@ -71,15 +72,17 @@ function DOTSystem() {
 
 function TrafficLight(serialNo, greenLightDuration, redLightDuration) {
     this.serialNo = serialNo;
-    this.greenLightDuration = greenLightDuration; // length of the green light
-    this.redLightDuration = redLightDuration; // length of the red light
+    this.greenLightDuration = greenLightDuration; // length of the green light in seconds
+    this.redLightDuration = redLightDuration; // length of the red light seconds
     this.cars = {}; // Cars at the intersection
     this.turnRed = () => {
         console.log("turning red intensifies");
         // Should remove a fixed number of cars from the based on the duration; cars to remove (cars) = coefficient (cars/s) * duration (s)
+
     };
     this.turnGreen = () => {
         console.log("turning green");
+
     };
 }
 var deptTran = new DOTSystem(); // Make a new department who has a network of lights (made with *.addTrafficLight(lightSerialNo)
